@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21d5b5da066d2d47af28727222d2281, type: 3}
+  m_Name: Splat
+  m_EditorClassIdentifier: 
+  sonidos:
+  - {fileID: 8300000, guid: dd3d40a8fca24334b862eb8ed8a955ee, type: 3}
+  - {fileID: 8300000, guid: 5a2cb030062534b4ea198af9a32532be, type: 3}
+  - {fileID: 8300000, guid: ecb12128e7030f145a02709c15ba591a, type: 3}
+  - {fileID: 8300000, guid: 006235fb4e27e9b42adf12d34182f653, type: 3}

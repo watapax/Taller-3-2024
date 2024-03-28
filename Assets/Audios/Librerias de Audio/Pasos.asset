@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21d5b5da066d2d47af28727222d2281, type: 3}
+  m_Name: Pasos
+  m_EditorClassIdentifier: 
+  sonidos:
+  - {fileID: 8300000, guid: 449a4ea07a4e1444e9565422400a3f4a, type: 3}
+  - {fileID: 8300000, guid: 1bc226a0653cb53438ec58bbf645d2c1, type: 3}
+  - {fileID: 8300000, guid: 10fd7ca15ec882245bfb04bdccd3e490, type: 3}

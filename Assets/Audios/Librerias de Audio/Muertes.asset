@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21d5b5da066d2d47af28727222d2281, type: 3}
+  m_Name: Muertes
+  m_EditorClassIdentifier: 
+  sonidos:
+  - {fileID: 8300000, guid: dc5c1a7613f1d5a43a4928fe025676be, type: 3}
+  - {fileID: 8300000, guid: f57d76b4da00d064fae27ef74b3a2d84, type: 3}
+  - {fileID: 8300000, guid: b7de6010a75fb944b9b6a584ac4b3018, type: 3}
