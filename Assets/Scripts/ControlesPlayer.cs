@@ -33,21 +33,43 @@ public class ControlesPlayer : MonoBehaviour
     bool checkCayendo;
     bool saltando;
 
+    // esto es para chequear el daño de caida
+    Vector3 posicionAnterior;
+    Vector3 direccion;
+    int sueloCount;
+    Collider2D col;
+    Vector2[] groundCheckPos;
+    bool prevGround;
+    public float velocidadDañoCaida;
+
+    // esto es para aplicar una fuerza externa (recoil)
+    Vector2 fuerzaExterna;
+    public float disipadorFuerzaExterna;
+
+
     private void Awake()
     {
-
+        groundCheckPos = new Vector2[3];
+        col = GetComponent<BoxCollider2D>();
         rb2d = GetComponent<Rigidbody2D>();
         disparar = GetComponent<Disparar>();
         gravedad = Physics2D.gravity.y;
         prevenirDispararPiso = GetComponentInChildren<PrevenirDispararPiso>();
         CheckPointSystem.instance.ActualizarUltimaPos(transform.position);
 
+        posicionAnterior = transform.position;
+
+        
+
     }
 
     private void Update()
     {
+        CheckSuelo();
+        CheckDañoCaida();
         Saltar();
         Moverse();
+        DisiparFuerzaExterna();
         Disparar();
         DatosAnimator();
     }
@@ -103,14 +125,30 @@ public class ControlesPlayer : MonoBehaviour
             StartCoroutine(CheckAterrizaje());
         }
 
-        horizontal = Input.GetAxis("Horizontal") * velocidadMovimiento ;
+        horizontal = Input.GetAxis("Horizontal") * velocidadMovimiento  ;
         SonidosPaso();
     }
 
     private void FixedUpdate()
     {
+        Vector2 direccionMovimiento = new Vector2(horizontal, 0);
+        //rb2d.AddForce(direccionMovimiento);
+        //transform.Translate(direccionMovimiento);
+        rb2d.velocity = new Vector2(horizontal  + fuerzaExterna.x, rb2d.velocity.y);
+    }
 
-        rb2d.velocity = new Vector2(horizontal , rb2d.velocity.y) ;
+    void CheckDañoCaida()
+    {
+        // Si en el frame anterior no estaba en el suelo pero en este si?
+        if(!prevGround && grounded)
+        {
+            print("aterrizaje a: "+direccion.y);
+            if(direccion.y < -velocidadDañoCaida)
+            {
+                // acá aplicar el Daño
+            }
+
+        }
     }
 
     void SonidosPaso()
@@ -125,10 +163,39 @@ public class ControlesPlayer : MonoBehaviour
 
     ///////////////////////////////////////
 
-    public void HaySuelo(bool state)
+    void CheckSuelo()
     {
-        grounded = state;
+        // obtener la direccion del objeto calculando la posición en el frame anterior y restandole la posicion actual
+        direccion = transform.position - posicionAnterior;
+        posicionAnterior = transform.position;
+        
+        // esto es para saber si en el frame anterior estaba o no en el suelo
+        prevGround = grounded;
+
+        // acá viene la magia negra
+        sueloCount = 0;
+        Bounds bounds = col.bounds;
+        
+        // abajo Izquierda
+        groundCheckPos[0] = new Vector2(bounds.center.x - bounds.extents.x, bounds.center.y - bounds.extents.y);
+
+        // abajo Centro
+        groundCheckPos[1] = new Vector2(bounds.center.x, bounds.center.y - bounds.extents.y);
+
+        // abajo Derecha
+        groundCheckPos[2] = new Vector2(bounds.center.x + bounds.extents.x, bounds.center.y - bounds.extents.y);
+
+        for (int i = 0; i < 3; i++)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(groundCheckPos[i], Vector2.down, 0.05f, layerPiso);
+            if (hit.collider != null)
+                sueloCount++;
+        }
+
+        // si alguno de los 3 raycast toca suelo, entonces hay piso
+        grounded = sueloCount > 0;
     }
+
 
 
 
@@ -148,8 +215,18 @@ public class ControlesPlayer : MonoBehaviour
     }
 
 
-    
 
+    public void AplicarRecoil(Vector2 direccion)
+    {
+        //rb2d.AddForce(direccion * -1, ForceMode2D.Impulse);
+        fuerzaExterna = direccion * -1;
+        //rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y + fuerzaExterna.y);
+    }
+
+    void DisiparFuerzaExterna()
+    {
+        fuerzaExterna = Vector2.MoveTowards(fuerzaExterna, Vector2.zero, Time.deltaTime * disipadorFuerzaExterna);
+    }
 
 
 

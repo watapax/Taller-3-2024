@@ -18,6 +18,7 @@ public class Disparar : MonoBehaviour
     public Rigidbody2D rb2d;
     ControlesPlayer cp;
     bool facingRight = true;
+    Vector2 direccionRecoil;
     private void Awake()
     {
         cp = GetComponent<ControlesPlayer>();
@@ -33,18 +34,25 @@ public class Disparar : MonoBehaviour
         Instantiate(muzzleFlash, spawnPoint.position, spawnPoint.rotation);
         SoundFXManager.instance.ReproducirSFX(sonidosDisparo);
         t = 0;  
-        //Recoil();
+        Recoil();
     }
 
     private void Recoil()
     {
-        rb2d.AddForce(-transform.right * fuerzaCadencia, ForceMode2D.Impulse);
+        cp.AplicarRecoil(direccionRecoil.normalized * fuerzaCadencia);
+        //rb2d.AddForce(-transform.right * fuerzaCadencia, ForceMode2D.Impulse);
+    }
+
+    public void Recoil(float intensidad)
+    {
+        cp.AplicarRecoil(direccionRecoil.normalized * (fuerzaCadencia + intensidad));
     }
 
     private void Update()
     {
         t += Time.deltaTime;
         SeguirMouse();
+
     }
 
     void SeguirMouse()
@@ -55,8 +63,9 @@ public class Disparar : MonoBehaviour
         mp.z = Math.Abs(Camera.main.transform.position.z - pivoteArma.position.z);
 
         Vector3 wmp = Camera.main.ScreenToWorldPoint(mp);
-        Vector2 direccion = wmp - pivoteArma.position;
-        pivoteArma.right = facingRight? direccion : -direccion;
+        direccionRecoil = wmp - pivoteArma.position;
+        //Vector2 direccion = wmp - pivoteArma.position;
+        pivoteArma.right = facingRight? direccionRecoil : -direccionRecoil;
 
         //hacer el flip aca
         if ((wmp.x > transform.position.x && !facingRight) || (wmp.x < transform.position.x && facingRight))

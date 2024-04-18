@@ -33,7 +33,6 @@ public class IntensidadLuzRandom : MonoBehaviour
             t = 0;
             frecuencia = Random.Range(startFreq - 0.1f, startFreq + 0.1f);
         }
-
     }
 
 }

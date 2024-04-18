@@ -12,13 +12,17 @@ public class GroundChecker : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        /*
         if (collision.CompareTag("Piso"))
             controlesPlayer.HaySuelo(true);
+            */
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        /*
         if (collision.CompareTag("Piso"))
             controlesPlayer.HaySuelo(false);
+            */
     }
 }
