@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PrevenirDispararPiso : MonoBehaviour
 {
+    public bool activarEsto;
     bool armaEnPiso;
 
     public bool ArmaEnPiso
     {
-        get { return armaEnPiso; }
+        get { return activarEsto ? armaEnPiso : false; }
     }
 
     private void OnTriggerStay2D(Collider2D collision)

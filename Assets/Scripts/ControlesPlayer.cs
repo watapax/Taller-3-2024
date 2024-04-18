@@ -220,7 +220,7 @@ public class ControlesPlayer : MonoBehaviour
     {
         //rb2d.AddForce(direccion * -1, ForceMode2D.Impulse);
         fuerzaExterna = direccion * -1;
-        //rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y + fuerzaExterna.y);
+        rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y + fuerzaExterna.y);
     }
 
     void DisiparFuerzaExterna()
