@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Proyectil : MonoBehaviour
 {
+    public bool puedeRebotar;
+    public int rebotesMaximos;
     public int damage;
     public GameObject impactPrefab;
     public float velocidadBala;
     RaycastHit2D hit;
     public Rigidbody2D rb2d;
+    public LayerMask layerMask;
 
     Vector3 posicionAnterior;
     SonidosGameObject sonidosGO;
-
+    int rebotes;
     private void Awake()
     {
         sonidosGO = GetComponent<SonidosGameObject>();
@@ -31,7 +34,7 @@ public class Proyectil : MonoBehaviour
         Vector2 direccion = (transform.position - posicionAnterior);
         posicionAnterior = transform.position;
 
-        hit = Physics2D.Raycast(transform.position, direccion.normalized, direccion.magnitude);
+        hit = Physics2D.Raycast(transform.position, direccion.normalized, direccion.magnitude, layerMask);
 
         if(hit.collider != null)
         {
@@ -41,8 +44,21 @@ public class Proyectil : MonoBehaviour
             if (impactPrefab)
                 Instantiate(impactPrefab, hit.point, Quaternion.identity);
 
+            if(puedeRebotar)
+            {
+                transform.right = Vector3.Reflect(transform.right, hit.normal);
+                if (rebotes > rebotesMaximos)
+                    Destroy(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+            
+
             sonidosGO.ReproducirSonido();
-            Destroy(gameObject);
+            rebotes++;
+
         }
 
         

@@ -8909,7 +8909,7 @@ GameObject:
   - component: {fileID: 794256647}
   - component: {fileID: 794256646}
   - component: {fileID: 794256645}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Arma
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12644,7 +12644,7 @@ GameObject:
   - component: {fileID: 2026853721}
   - component: {fileID: 2026853722}
   - component: {fileID: 2026853723}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
