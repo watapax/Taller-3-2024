@@ -734,7 +734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &152113253
 Transform:
   m_ObjectHideFlags: 0
@@ -1394,63 +1394,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPosition: {fileID: 928006805}
   spawnObject: {fileID: 8222891166589705645, guid: 675b7dd2766d5854ab2b183c3a06da13, type: 3}
---- !u!1001 &257476534
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3546439131017204523, guid: 40a08baf59463624fb1454e9247b5890, type: 3}
-      propertyPath: m_Name
-      value: Destello
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826119419968657474, guid: 40a08baf59463624fb1454e9247b5890, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4.8532696
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826119419968657474, guid: 40a08baf59463624fb1454e9247b5890, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.2361505
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826119419968657474, guid: 40a08baf59463624fb1454e9247b5890, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826119419968657474, guid: 40a08baf59463624fb1454e9247b5890, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826119419968657474, guid: 40a08baf59463624fb1454e9247b5890, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826119419968657474, guid: 40a08baf59463624fb1454e9247b5890, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826119419968657474, guid: 40a08baf59463624fb1454e9247b5890, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826119419968657474, guid: 40a08baf59463624fb1454e9247b5890, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826119419968657474, guid: 40a08baf59463624fb1454e9247b5890, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826119419968657474, guid: 40a08baf59463624fb1454e9247b5890, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 40a08baf59463624fb1454e9247b5890, type: 3}
 --- !u!1 &276061891
 GameObject:
   m_ObjectHideFlags: 0
@@ -11339,7 +11282,6 @@ GameObject:
   - component: {fileID: 1444146979}
   - component: {fileID: 1444146978}
   - component: {fileID: 1444146981}
-  - component: {fileID: 1444146982}
   m_Layer: 9
   m_Name: Square
   m_TagString: Piso
@@ -11453,7 +11395,7 @@ Transform:
   m_GameObject: {fileID: 1444146977}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.78, y: -0.45, z: 0}
+  m_LocalPosition: {x: -1.48, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11471,33 +11413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cb4d85489f1f74cae9f89e0298fb78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!50 &1444146982
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1444146977}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 3
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
 --- !u!1 &1447146263
 GameObject:
   m_ObjectHideFlags: 0
@@ -13599,7 +13514,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puedeUsarMecanica: 1
   pivoteBrazo: {fileID: 39924690}
-  fuerzaLanzamiento: 30
 --- !u!1 &2041380023
 GameObject:
   m_ObjectHideFlags: 0
@@ -14194,4 +14108,3 @@ SceneRoots:
   - {fileID: 683474643}
   - {fileID: 715073930}
   - {fileID: 1537654927}
-  - {fileID: 257476534}

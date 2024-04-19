@@ -47,6 +47,8 @@ public class ControlesPlayer : MonoBehaviour
     public float disipadorFuerzaExterna;
 
 
+
+
     private void Awake()
     {
         groundCheckPos = new Vector2[3];

@@ -18,7 +18,7 @@ public class Disparar : MonoBehaviour
     public Rigidbody2D rb2d;
     ControlesPlayer cp;
     bool facingRight = true;
-    Vector2 direccionRecoil;
+    public static Vector2 direccionRecoil;
     private void Awake()
     {
         cp = GetComponent<ControlesPlayer>();
