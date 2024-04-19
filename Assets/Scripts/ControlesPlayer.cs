@@ -45,7 +45,7 @@ public class ControlesPlayer : MonoBehaviour
     // esto es para aplicar una fuerza externa (recoil)
     Vector2 fuerzaExterna;
     public float disipadorFuerzaExterna;
-
+    public static Vector3 posPlayer;
 
 
 
@@ -67,6 +67,7 @@ public class ControlesPlayer : MonoBehaviour
 
     private void Update()
     {
+        posPlayer = transform.position;
         CheckSuelo();
         CheckDañoCaida();
         Saltar();
