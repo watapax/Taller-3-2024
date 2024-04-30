@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Piso
   - Lava
+  - PlataformaMovil
   layers:
   - Default
   - TransparentFX
