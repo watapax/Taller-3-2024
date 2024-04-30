@@ -24,7 +24,7 @@ public class ControlesPlayer : MonoBehaviour
     public float tiempoEntrePasos;
     float tiempoUltimoPaso;
 
-    bool grounded;
+    public bool grounded;
 
 
     Collider2D col2D;
@@ -46,7 +46,7 @@ public class ControlesPlayer : MonoBehaviour
     Vector2 fuerzaExterna;
     public float disipadorFuerzaExterna;
     public static Vector3 posPlayer;
-
+    public Rigidbody2D movilePlatformRb;
 
 
     private void Awake()
@@ -90,7 +90,13 @@ public class ControlesPlayer : MonoBehaviour
 
         if(grounded && Input.GetKeyDown(botonSalto))
         {
-            rb2d.velocity = new Vector2(rb2d.velocity.x,  datosSalto.velocidadSalto);
+            float impulsoPlataforma = 0;
+            if(movilePlatformRb != null)
+            {
+                impulsoPlataforma = movilePlatformRb.velocity.y >0? movilePlatformRb.velocity.y:0 ;
+                movilePlatformRb = null;
+            }
+            rb2d.velocity = new Vector2(rb2d.velocity.x,  datosSalto.velocidadSalto + impulsoPlataforma);
             SoundFXManager.instance.ReproducirSFX(sonidoSalto);
             StartCoroutine(CheckAterrizaje());
             saltando = true;
@@ -137,7 +143,14 @@ public class ControlesPlayer : MonoBehaviour
         Vector2 direccionMovimiento = new Vector2(horizontal, 0);
         //rb2d.AddForce(direccionMovimiento);
         //transform.Translate(direccionMovimiento);
-        rb2d.velocity = new Vector2(horizontal  + fuerzaExterna.x, rb2d.velocity.y);
+        if(movilePlatformRb!= null)
+        {
+            rb2d.velocity = new Vector2(movilePlatformRb.velocity.x + horizontal + fuerzaExterna.x, movilePlatformRb.velocity.y) ;
+        }
+        else
+        {
+            rb2d.velocity = new Vector2(horizontal  + fuerzaExterna.x, rb2d.velocity.y);
+        }
     }
 
     void CheckDañoCaida()
@@ -145,7 +158,7 @@ public class ControlesPlayer : MonoBehaviour
         // Si en el frame anterior no estaba en el suelo pero en este si?
         if(!prevGround && grounded)
         {
-            print("aterrizaje a: "+direccion.y);
+            
             if(direccion.y < -velocidadDañoCaida)
             {
                 // acá aplicar el Daño
@@ -169,7 +182,7 @@ public class ControlesPlayer : MonoBehaviour
     void CheckSuelo()
     {
         // obtener la direccion del objeto calculando la posición en el frame anterior y restandole la posicion actual
-        direccion = transform.position - posicionAnterior;
+        direccion = (transform.position - posicionAnterior) / Time.deltaTime;
         posicionAnterior = transform.position;
         
         // esto es para saber si en el frame anterior estaba o no en el suelo
@@ -232,7 +245,21 @@ public class ControlesPlayer : MonoBehaviour
     }
 
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.transform.GetComponentInParent<MovilePlatformRB>())
+        {
+            movilePlatformRb = collision.transform.GetComponent<Rigidbody2D>();
+        }
+    }
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.transform.GetComponentInParent<MovilePlatformRB>())
+        {
+            movilePlatformRb = null;
+        }
+    }
 
 
 
