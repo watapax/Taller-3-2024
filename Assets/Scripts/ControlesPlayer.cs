@@ -247,7 +247,7 @@ public class ControlesPlayer : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.transform.GetComponentInParent<MovilePlatformRB>())
+        if (collision.transform.CompareTag("PlataformaMovil"))
         {
             movilePlatformRb = collision.transform.GetComponent<Rigidbody2D>();
         }
@@ -255,7 +255,7 @@ public class ControlesPlayer : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.transform.GetComponentInParent<MovilePlatformRB>())
+        if (collision.transform.CompareTag("PlataformaMovil"))
         {
             movilePlatformRb = null;
         }
