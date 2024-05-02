@@ -48,6 +48,8 @@ public class ControlesPlayer : MonoBehaviour
     public static Vector3 posPlayer;
     public Rigidbody2D movilePlatformRb;
 
+    bool disableVelocityInput;
+
 
     private void Awake()
     {
@@ -75,6 +77,9 @@ public class ControlesPlayer : MonoBehaviour
         DisiparFuerzaExterna();
         Disparar();
         DatosAnimator();
+
+        //Debug
+        TestearFuerza();
     }
 
     void DatosAnimator()
@@ -140,9 +145,11 @@ public class ControlesPlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 direccionMovimiento = new Vector2(horizontal, 0);
-        //rb2d.AddForce(direccionMovimiento);
-        //transform.Translate(direccionMovimiento);
+        if(disableVelocityInput)
+        {
+            return;
+        }
+
         if(movilePlatformRb!= null)
         {
             rb2d.velocity = new Vector2(movilePlatformRb.velocity.x + horizontal + fuerzaExterna.x, movilePlatformRb.velocity.y) ;
@@ -150,6 +157,7 @@ public class ControlesPlayer : MonoBehaviour
         else
         {
             rb2d.velocity = new Vector2(horizontal  + fuerzaExterna.x, rb2d.velocity.y);
+            //rb2d.AddForce(Vector2.right * horizontal, ForceMode2D.Force);
         }
     }
 
@@ -158,7 +166,8 @@ public class ControlesPlayer : MonoBehaviour
         // Si en el frame anterior no estaba en el suelo pero en este si?
         if(!prevGround && grounded)
         {
-            
+            // aterrizo
+            disableVelocityInput = false;
             if(direccion.y < -velocidadDañoCaida)
             {
                 // acá aplicar el Daño
@@ -249,7 +258,15 @@ public class ControlesPlayer : MonoBehaviour
     {
         if (collision.transform.CompareTag("PlataformaMovil"))
         {
-            movilePlatformRb = collision.transform.GetComponent<Rigidbody2D>();
+            // chequear si la plataformaMovil está debajo del player
+
+            Bounds bounds = collision.collider.bounds;
+            Vector2 superficiePlataforma = new Vector2(bounds.center.x, bounds.center.y + bounds.extents.y);
+
+            if(transform.position.y >= superficiePlataforma.y)
+            {
+                movilePlatformRb = collision.transform.GetComponent<Rigidbody2D>();
+            }
         }
     }
 
@@ -262,5 +279,14 @@ public class ControlesPlayer : MonoBehaviour
     }
 
 
+    void TestearFuerza()
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            disableVelocityInput = true;
+            
+            rb2d.AddForce(Vector2.one * 10, ForceMode2D.Impulse);
+        }
+    }
 
 }
